@@ -4,5 +4,5 @@ require 'sinatra/content_for'
 require 'tilt/erubis'
 
 get '/' do
-  'Getting started.'
+  erb :index
 end
