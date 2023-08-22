@@ -1,3 +1,1 @@
-Since its public release in 1995, Ruby has drawn devoted coders worldwide.
-In 2006, Ruby achieved mass acceptance. With active user groups formed in the world’s
-major cities and Ruby-related conferences filled to capacity.
+new content
