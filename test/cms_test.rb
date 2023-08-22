@@ -29,4 +29,17 @@ class CMSTest < Minitest::Test
     assert_equal 'text/plain', last_response['Content-Type']
     assert_includes last_response.body, 'Ruby is a language of careful balance.'
   end
+
+  def test_document_not_found
+    get '/nofile.txt'
+
+    assert_equal 302, last_response.status
+    get last_response['Location']
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, 'nofile.txt does not exist'
+
+    get '/'
+    refute_includes last_response.body, 'nofile.txt does not exist'
+  end
 end
