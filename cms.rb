@@ -46,6 +46,10 @@ get '/new' do
   erb :new
 end
 
+get '/users/signin' do
+  erb :signin
+end
+
 get '/:filename' do
   file_path = File.join(data_path, params[:filename])
 
@@ -64,6 +68,24 @@ get '/:filename/edit' do
   @content = File.read(file_path)
 
   erb :edit
+end
+
+post '/users/signin' do
+  if params[:username] == 'admin' && params[:password] == 'secret'
+    session[:username] = params[:username]
+    session[:message] = 'Welcome!'
+    redirect '/'
+  else
+    session[:message] = 'Invalid credentials'
+    status 422
+    erb :signin
+  end
+end
+
+post '/users/signout' do
+  session.delete(:username)
+  session[:message] = 'You have been signed out.'
+  redirect '/'
 end
 
 post '/create' do
